@@ -9,6 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// server.js ke andar "app.use(express.json());" ke niche ye daalo:
+app.get('/', (req, res) => {
+    res.send("Backend is live and running! 🚀");
+});
+
 // Route for Form Submission
 app.post('/send-message', async (req, res) => {
     const { name, email, message } = req.body;
