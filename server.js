@@ -25,12 +25,20 @@ app.post('/send-message', async (req, res) => {
     try {
         // Nodemailer Transporter Setup
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        });
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Port 465 ke liye true rahega
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    },
+    tls: {
+        rejectUnauthorized: false // Ye connection ko fail hone se rokta hai
+    },
+    connectionTimeout: 10000, // 10 seconds wait karega
+    greetingTimeout: 10000,
+    socketTimeout: 10000
+});
 
         // Email Format
         const mailOptions = {
