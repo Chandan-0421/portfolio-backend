@@ -8,7 +8,13 @@ dns.setDefaultResultOrder('ipv4first'); // <--- Ye line magic karegi
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin: [
+        'http://127.0.0.1:3002',
+        'http://localhost:3002',
+        'https://chandan-singh.vercel.app'  // add your real frontend URL here
+    ]
+}));
 app.use(express.json());
 
 // server.js ke andar "app.use(express.json());" ke niche ye daalo:
